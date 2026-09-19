@@ -315,9 +315,10 @@ def main() -> int:
             transcript_text = entry["transcript_path"].read_text(encoding="utf-8").strip().removeprefix("# Transcript").strip()
             username = metadata.get("username") or "unknown"
             profile_link = f"https://www.instagram.com/{username}/" if username != "unknown" else "https://www.instagram.com/"
-            heading = f"### [{metadata.get('code')}]({entry['note_path'].relative_to(SCRIPT_DIR).as_posix()}) by [@{username}]({profile_link})"
+            folder_link = entry["metadata_path"].parent.relative_to(SCRIPT_DIR).as_posix()
+            heading = f"### [{metadata.get('code')}]({folder_link}/) by [@{username}]({profile_link})"
             index_lines.extend([heading, "", summary_text, "", f"- [Video]({entry['video_path'].relative_to(SCRIPT_DIR).as_posix()})", f"- [Transcript]({entry['transcript_path'].relative_to(SCRIPT_DIR).as_posix()})", f"- [Metadata]({entry['metadata_path'].relative_to(SCRIPT_DIR).as_posix()})", ""])
-            long_index_lines.extend([f"### {metadata.get('code')} by [@{username}]({profile_link})", "", transcript_text, ""])
+            long_index_lines.extend([f"### [{metadata.get('code')}]({folder_link}/) by [@{username}]({profile_link})", "", transcript_text, ""])
     INDEX_FILE.write_text("\n".join(index_lines), encoding="utf-8")
     LONG_INDEX_FILE.write_text("\n".join(long_index_lines), encoding="utf-8")
     print(f"Sync complete: {len(synced)} Reel(s), {skipped} skipped, {len(failed)} failed.")
