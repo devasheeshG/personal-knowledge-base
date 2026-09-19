@@ -1,0 +1,18 @@
+# Global credentials and local caches
+.env
+.cache/
+*.cache
+.venv/
+
+# Local authenticated export
+instagram/instagram.curl
+
+# Personal knowledge-base data
+instagram/reels/
+instagram/Instagram Saved Reels.md
+instagram/Instagram Saved Reels Long.md
+
+# Python caches and local tooling
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
